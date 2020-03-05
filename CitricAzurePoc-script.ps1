@@ -5,13 +5,15 @@ $adminUsername = Read-Host -Prompt "Enter the administrator username"
 $adminPassword = Read-Host -Prompt "Enter the administrator password" -AsSecureString
 $dnsLabelPrefix = Read-Host -Prompt "Enter an unique DNS name for the public IP"
 
-New-AzResourceGroup -Name $resourceGroupName -Location "$location"
+New-AzResourceGroup -Name $VmResourceGroupName -Location "$location"
 New-AzResourceGroupDeployment `
-    -ResourceGroupName $resourceGroupName `
-    -TemplateUri "https://raw.githubusercontent.com/Azure/azure-quickstart-templates/master/101-vm-simple-windows/azuredeploy.json" `
+    -ResourceGroupName $VmResourceGroupName `
+    -TemplateUri "https://raw.githubusercontent.com/xenblog/CVAD-AzurePoC/master/Templates/CitrixCloudConnector.json" `
+    -vmName "az-ccc01" `
     -adminUsername $adminUsername `
     -adminPassword $adminPassword `
     -dnsLabelPrefix $dnsLabelPrefix `
-    -windowsOSVersion "2008-R2-SP1"
+    -windowsOSVersion '2012-R2-Datacenter' `
+    -vmSize 'Standard_D2_v3'
 
- (Get-AzVm -ResourceGroupName $resourceGroupName).name
+ (Get-AzVm -ResourceGroupName $VmResourceGroupName).name

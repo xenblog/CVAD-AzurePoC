@@ -1,0 +1,42 @@
+{
+    "$schema": "https://schema.management.azure.com/schemas/2015-01-01/deploymentParameters.json#",
+    "contentVersion": "1.0.0.0",
+    "parameters": {
+        "location": {
+            "value": "westeurope"
+        },
+        "networkInterfaceName": {
+            "value": "az-ccc0149"
+        },
+        "networkSecurityGroupName": {
+            "value": "az-ccc01-nsg"
+        },
+        "networkSecurityGroupRules": {
+            "value": []
+        },
+        "subnetName": {
+            "value": "Infrastructure"
+        },
+        "virtualNetworkId": {
+            "value": "/subscriptions/adbd9a10-d215-4156-b35f-6898be0c1e51/resourceGroups/WEU-CoreService_rg/providers/Microsoft.Network/virtualNetworks/CoreNetwork"
+        },
+        "virtualMachineName": {
+            "value": "az-ccc01"
+        },
+        "virtualMachineRG": {
+            "value": "WEU-CoreService_rg"
+        },
+        "osDiskType": {
+            "value": "StandardSSD_LRS"
+        },
+        "virtualMachineSize": {
+            "value": "Standard_B2ms"
+        },
+        "adminUsername": {
+            "value": "azurelocaladmin"
+        },
+        "adminPassword": {
+            "value": null
+        }
+    }
+}
