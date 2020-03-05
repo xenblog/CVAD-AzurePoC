@@ -62,7 +62,7 @@
         "metadata": {
           "description": "Location of powershell script to customize your image"
         }
-      },
+      }
     },
     "variables": {
       "storageAccountName": "[concat(uniquestring(resourceGroup().id), 'sawinvm')]",
