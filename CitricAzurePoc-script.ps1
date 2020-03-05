@@ -13,7 +13,7 @@ New-AzResourceGroupDeployment `
     -adminUsername $adminUsername `
     -adminPassword $adminPassword `
     -dnsLabelPrefix $dnsLabelPrefix `
-    -windowsOSVersion '2012-R2-Datacenter' `
+    -windowsOSVersion '2019-Datacenter' `
     -vmSize 'Standard_D2_v3'
 
  (Get-AzVm -ResourceGroupName $VmResourceGroupName).name
