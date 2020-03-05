@@ -194,17 +194,6 @@
             "adminUsername": "[parameters('adminUsername')]",
             "adminPassword": "[parameters('adminPassword')]"
           },
-          "customize": [
-            {
-              "type": "PowerShell",
-              "name": "InstallApps",
-              "scriptUri": "[parameters('ScriptUri')]"
-            },
-            {
-              "type": "WindowsRestart",
-              "restartTimeout": "30m"
-            }
-          ],
           "storageProfile": {
             "imageReference": {
               "publisher": "MicrosoftWindowsServer",
