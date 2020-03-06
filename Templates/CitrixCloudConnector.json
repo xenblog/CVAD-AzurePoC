@@ -182,8 +182,5 @@
     }
   ],
   "outputs": {
-    "hostname": {
-      "type": "string"
-    }
   }
 }
