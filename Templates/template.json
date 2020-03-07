@@ -65,7 +65,7 @@
     },
     "resources": [
         {
-            "name": "[concat(parameters('virtualMachineName'), '_Nic01')]",
+            "name": "[concat(parameters('virtualMachineName'), 'Nic01')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-07-01",
             "location": "[parameters('location')]",
