@@ -8,6 +8,7 @@ $dnsLabelPrefix = "az-ccc01" # Read-Host -Prompt "Enter an unique DNS name for t
 
 New-AzResourceGroup -Name $VmResourceGroupName -Location "$location"
 New-AzResourceGroupDeployment `
+    -Location 'westeurope' `
     -virtualMachineRG $VmResourceGroupName `
     -TemplateUri "https://raw.githubusercontent.com/xenblog/CVAD-AzurePoC/master/Templates/template.json" `
     -virtualMachineName $vmName `
