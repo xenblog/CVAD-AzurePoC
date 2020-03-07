@@ -18,7 +18,8 @@
             "type": "string"
         },
         "virtualNetworkId": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "/subscriptions/adbd9a10-d215-4156-b35f-6898be0c1e51/resourceGroups/WEU-CoreService_rg/providers/Microsoft.Network/virtualNetworks/CoreNetwork"
         },
         "virtualMachineName": {
             "type": "string"
@@ -27,7 +28,8 @@
             "type": "string"
         },
         "osDiskType": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "StandardSSD_LRS"
         },
         "virtualMachineSize": {
             "type": "string"
@@ -46,7 +48,7 @@
     },
     "resources": [
         {
-            "name": "[parameters('networkInterfaceName')]",
+            "name": "[concat(parameters('virtualMachineName'), '_Nic01']",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-07-01",
             "location": "[parameters('location')]",
