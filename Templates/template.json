@@ -3,25 +3,48 @@
     "contentVersion": "1.0.0.0",
     "parameters": {
         "location": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "westeurope",
         },
-        "networkSecurityGroupRules": {
-            "type": "array",
-            "defaultValue": null
+        "networkInterfaceName": {
+            "type": "string"
         },
         "subnetName": {
             "type": "string"
         },
         "virtualNetworkId": {
-            "type": "string",
-            "defaultValue": "/subscriptions/adbd9a10-d215-4156-b35f-6898be0c1e51/resourceGroups/WEU-CoreService_rg/providers/Microsoft.Network/virtualNetworks/CoreNetwork"
+            "type": "string"
         },
         "virtualMachineName": {
             "type": "string"
         },
+        "virtualMachineRG": {
+            "type": "string"
+        },
+        "osDiskType": {
+            "type": "string",
+            "defaultValue": "StandardSSD_LRS",
+            "allowedValues": [
+              "StandardSSD_LRS",
+              "PremiumSSD_LRS"
+            ],
+            "metadata": {
+              "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
+            }
+        },
+        "virtualMachineSize": {
+            "type": "string",
+            "defaultValue": "Standard_D2s_v3"
+        },
+        "adminUsername": {
+            "type": "string"
+        },
+        "adminPassword": {
+            "type": "secureString"
+        },
         "windowsOSVersion": {
             "type": "string",
-            "defaultValue": "2016-Datacenter",
+            "defaultValue": "2019-Datacenter",
             "allowedValues": [
               "2008-R2-SP1",
               "2012-Datacenter",
@@ -34,42 +57,20 @@
             "metadata": {
               "description": "The Windows version for the VM. This will pick a fully patched image of this given Windows version."
             }
-          },
-        "virtualMachineRG": {
-            "type": "string"
-        },
-        "osDiskType": {
-            "type": "string",
-            "defaultValue": "StandardSSD_LRS"
-        },
-        "virtualMachineSize": {
-            "type": "string"
-        },
-        "adminUsername": {
-            "type": "string"
-        },
-        "adminPassword": {
-            "type": "secureString"
-        }
+          }
     },
     "variables": {
-        "networkSecurityGroupName": "[concat(parameters('virtualMachineName'), '-nsg')]",
-        "nsgId": "[resourceId(resourceGroup().name, 'Microsoft.Network/networkSecurityGroups', variables('networkSecurityGroupName'))]",
         "vnetId": "[parameters('virtualNetworkId')]",
         "subnetRef": "[concat(variables('vnetId'), '/subnets/', parameters('subnetName'))]",
-        "networkInterfaceName": "[concat(parameters('virtualMachineName'), 'Nic01')]"
-        },
-
+        "osDiskName": "[concat(parameters('virtualMachineName'), '_osdisk')]"
     },
     "resources": [
         {
-            "name": "[variables('networkInterfaceName')]",
+            "name": "[parameters('networkInterfaceName')]",
             "type": "Microsoft.Network/networkInterfaces",
             "apiVersion": "2019-07-01",
             "location": "[parameters('location')]",
-            "dependsOn": [
-                "[concat('Microsoft.Network/networkSecurityGroups/', variables('networkSecurityGroupName'))]"
-            ],
+            "dependsOn": [],
             "properties": {
                 "ipConfigurations": [
                     {
@@ -81,19 +82,7 @@
                             "privateIPAllocationMethod": "Dynamic"
                         }
                     }
-                ],
-                "networkSecurityGroup": {
-                    "id": "[variables('nsgId')]"
-                }
-            }
-        },
-        {
-            "name": "[variables('networkSecurityGroupName')]",
-            "type": "Microsoft.Network/networkSecurityGroups",
-            "apiVersion": "2019-02-01",
-            "location": "[parameters('location')]",
-            "properties": {
-                "securityRules": "[parameters('networkSecurityGroupRules')]"
+                ]
             }
         },
         {
@@ -102,7 +91,7 @@
             "apiVersion": "2019-07-01",
             "location": "[parameters('location')]",
             "dependsOn": [
-                "[concat('Microsoft.Network/networkInterfaces/', variables('networkInterfaceName'))]"
+                "[concat('Microsoft.Network/networkInterfaces/', parameters('networkInterfaceName'))]"
             ],
             "properties": {
                 "hardwareProfile": {
@@ -110,6 +99,7 @@
                 },
                 "storageProfile": {
                     "osDisk": {
+                        "name": "",
                         "createOption": "fromImage",
                         "managedDisk": {
                             "storageAccountType": "[parameters('osDiskType')]"
@@ -118,14 +108,14 @@
                     "imageReference": {
                         "publisher": "MicrosoftWindowsServer",
                         "offer": "WindowsServer",
-                        "sku": "[parameters('windowsOSVersion')]",
+                        "sku": ,
                         "version": "latest"
                     }
                 },
                 "networkProfile": {
                     "networkInterfaces": [
                         {
-                            "id": "[resourceId('Microsoft.Network/networkInterfaces', variables('networkInterfaceName'))]"
+                            "id": "[resourceId('Microsoft.Network/networkInterfaces', parameters('networkInterfaceName'))]"
                         }
                     ]
                 },

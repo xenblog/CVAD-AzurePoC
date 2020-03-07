@@ -6,13 +6,7 @@
             "value": "westeurope"
         },
         "networkInterfaceName": {
-            "value": "az-ccc0149"
-        },
-        "networkSecurityGroupName": {
-            "value": "az-ccc01-nsg"
-        },
-        "networkSecurityGroupRules": {
-            "value": []
+            "value": "az-ccc01_ni01"
         },
         "subnetName": {
             "value": "Infrastructure"
@@ -24,16 +18,16 @@
             "value": "az-ccc01"
         },
         "virtualMachineRG": {
-            "value": "WEU-CoreService_rg"
+            "value": "RG_WEU_CloudConnector"
         },
         "osDiskType": {
             "value": "StandardSSD_LRS"
         },
         "virtualMachineSize": {
-            "value": "Standard_B2ms"
+            "value": "Standard_D2s_v3"
         },
         "adminUsername": {
-            "value": "azurelocaladmin"
+            "value": "azulelocaladmin"
         },
         "adminPassword": {
             "value": null
