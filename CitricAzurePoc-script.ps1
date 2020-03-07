@@ -13,8 +13,7 @@ New-AzResourceGroupDeployment `
     -virtualMachineName $vmName `
     -adminUsername $adminUsername `
     -adminPassword $adminPassword `
-    -subnetName 'Infrastructure'
-    -dnsLabelPrefix $dnsLabelPrefix `
+    -subnetName 'Infrastructure' `
     -windowsOSVersion '2019-Datacenter' `
     -virtualMachineSize 'Standard_D2_v3'
 
