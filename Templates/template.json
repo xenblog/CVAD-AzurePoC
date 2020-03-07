@@ -6,13 +6,16 @@
             "type": "string"
         },
         "networkInterfaceName": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "[parameters('virtualMachineName')]"
         },
         "networkSecurityGroupName": {
-            "type": "string"
+            "type": "string",
+            "defaultValue": "[concat(parameters('virtualMachineName'), '-nsg')]"
         },
         "networkSecurityGroupRules": {
-            "type": "array"
+            "type": "array",
+            "defaultValue": null
         },
         "subnetName": {
             "type": "string"
